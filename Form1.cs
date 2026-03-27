@@ -19,7 +19,7 @@ namespace CalculosGeometricos
         }
         public void InicializarComponentes()
         {
-            
+
             this.Size = new Size(300, 330);
 
             //Etiqueta figura
@@ -58,14 +58,14 @@ namespace CalculosGeometricos
             btnCalcular = new Button();
             btnCalcular.Text = "Calcular";
             btnCalcular.AutoSize = true;
-            btnCalcular.Location = new Point(165,180);
+            btnCalcular.Location = new Point(165, 180);
             this.Controls.Add(btnCalcular);
 
             //Label Resultado
             Label lblResultado = new Label();
             lblResultado.Text = "Resultado";
             lblResultado.AutoSize = true;
-            lblResultado.Location = new Point(15,240);
+            lblResultado.Location = new Point(15, 240);
             this.Controls.Add(lblResultado);
 
             //TextBox Resultado
@@ -82,9 +82,9 @@ namespace CalculosGeometricos
             lblCampo1 = new Label();
             lblCampo2 = new Label();
             lblCampo3 = new Label();
-            lblCampo1.Text = "1";
-            lblCampo2.Text = "2";
-            lblCampo3.Text = "3";
+            lblCampo1.Text = "";
+            lblCampo2.Text = "";
+            lblCampo3.Text = "";
             lblCampo1.AutoSize = true;
             lblCampo2.AutoSize = true;
             lblCampo3.AutoSize = true;
@@ -104,15 +104,184 @@ namespace CalculosGeometricos
             txtCampo1.Location = new Point(80, 85);
             txtCampo2.Location = new Point(80, 115);
             txtCampo3.Location = new Point(80, 145);
+            lblCampo1.Visible = false;
+            lblCampo2.Visible = false;
+            lblCampo3.Visible = false;
+            txtCampo1.Visible = false;
+            txtCampo2.Visible = false;
+            txtCampo3.Visible = false;
             this.Controls.Add(txtCampo1);
             this.Controls.Add(txtCampo2);
             this.Controls.Add(txtCampo3);
+
+            //Evento click a boton
+            btnCalcular.Click += new EventHandler(btnCalcular_Click);
         }
         private void cmb_SelectedIndexChange(object sender, EventArgs e)
         {
             if(this.cmbCalculos.SelectedIndex != -1 && this.cmbFiguras.SelectedIndex != -1)
             {
-                
+                lblCampo1.Visible = false;
+                lblCampo2.Visible = false;
+                lblCampo3.Visible = false;
+                txtCampo1.Visible = false;
+                txtCampo2.Visible = false;
+                txtCampo3.Visible = false;
+                switch (this.cmbFiguras.SelectedItem)
+                {
+                    case "Cuadrado":
+                        if (this.cmbCalculos.SelectedItem == "Perímetro")
+                        {
+                            lblCampo1.Text = "Lado";
+                            lblCampo1.Visible = true;
+                            txtCampo1.Visible = true;
+                        }
+                        else 
+                        {
+                            lblCampo1.Text = "Lado";
+                            lblCampo1.Visible = true;
+                            txtCampo1.Visible = true;
+                        }
+                            break;
+                    case "Triangulo":
+                        if (this.cmbCalculos.SelectedItem == "Perímetro")
+                        {
+                            lblCampo1.Text = "Lado a";
+                            lblCampo1.Visible = true;
+                            txtCampo1.Visible = true;
+                            lblCampo2.Text = "Lado b";
+                            lblCampo2.Visible = true;
+                            txtCampo2.Visible = true;
+                            lblCampo3.Text = "Lado c";
+                            lblCampo3.Visible = true;
+                            txtCampo3.Visible = true;
+                        }
+                        else
+                        {
+                            lblCampo1.Text = "Base";
+                            lblCampo1.Visible = true;
+                            txtCampo1.Visible = true;
+                            lblCampo2.Text = "Altura";
+                            lblCampo2.Visible = true;
+                            txtCampo2.Visible = true;
+                        }
+                        break;
+                    case "Rectangulo":
+                        if (this.cmbCalculos.SelectedItem == "Perímetro")
+                        {
+                            lblCampo1.Text = "Base";
+                            lblCampo1.Visible = true;
+                            txtCampo1.Visible = true;
+                            lblCampo2.Text = "Altura";
+                            lblCampo2.Visible = true;
+                            txtCampo2.Visible = true;
+                        }
+                        else
+                        {
+                            lblCampo1.Text = "Base";
+                            lblCampo1.Visible = true;
+                            txtCampo1.Visible = true;
+                            lblCampo2.Text = "Altura";
+                            lblCampo2.Visible = true;
+                            txtCampo2.Visible = true;
+                        }
+                        break;
+                    case "Rombo":
+                     if (this.cmbCalculos.SelectedItem == "Perímetro")
+                        {
+                            lblCampo1.Text = "Lado";
+                            lblCampo1.Visible = true;
+                            txtCampo1.Visible = true;
+                        }
+                        else
+                        {
+                            lblCampo1.Text = "Mayor";
+                            lblCampo1.Visible = true;
+                            txtCampo1.Visible = true;
+                            lblCampo2.Text = "Menor";
+                            lblCampo2.Visible = true;
+                            txtCampo2.Visible = true;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private void btnCalcular_Click(object sender, EventArgs e) 
+        {
+            if (this.cmbCalculos.SelectedIndex != -1 && this.cmbFiguras.SelectedIndex != -1)
+            {
+                switch (this.cmbFiguras.SelectedItem)
+                {
+                    case "Cuadrado":
+                        if (this.cmbCalculos.SelectedItem == "Perímetro")
+                        {
+                            double lado = double.Parse(txtCampo1.Text);
+                            double resultado = 4 * lado;
+                            txtResultado.Text = resultado.ToString();
+                        }
+                        else
+                        {
+                            double lado = double.Parse(txtCampo1.Text);
+                            double resultado = lado * lado;
+                            txtResultado.Text = resultado.ToString();
+                        }
+                        break;
+                    case "Triangulo":
+                        if (this.cmbCalculos.SelectedItem == "Perímetro")
+                        {
+                            double ladoA = double.Parse(txtCampo1.Text); 
+                            double ladoB = double.Parse(txtCampo2.Text); 
+                            double ladoC = double.Parse(txtCampo3.Text); 
+                            double resultado = ladoA + ladoB + ladoC;
+
+                            txtResultado.Text = resultado.ToString();
+                        }
+                        else
+                        {
+                            double baseTri = double.Parse(txtCampo1.Text);
+                            double altura = double.Parse(txtCampo2.Text);
+                            double resultado = baseTri * altura / 2;
+                            txtResultado.Text = resultado.ToString();
+                        }
+                        break;
+                    case "Rectangulo":
+                        if (this.cmbCalculos.SelectedItem == "Perímetro")
+                        {
+                            double baseRect = double.Parse(txtCampo1.Text);
+                            double altura = double.Parse(txtCampo2.Text);
+                            double resultado = 2 * baseRect +  2 * altura ;
+                            txtResultado.Text = resultado.ToString();
+
+                        }
+                        else
+                        {
+                            double baseRect = double.Parse(txtCampo1.Text);
+                            double altura = double.Parse(txtCampo2.Text);
+                            double resultado = baseRect * altura;
+                            txtResultado.Text = resultado.ToString();
+                        }
+                        break;
+                    case "Rombo":
+                        if (this.cmbCalculos.SelectedItem == "Perímetro")
+                        {
+                            double lado = double.Parse(txtCampo1.Text);
+                            double resultado = 4 * lado;
+                            txtResultado.Text = resultado.ToString();
+
+                        }
+                        else
+                        {
+                            double dMayor = double.Parse(txtCampo1.Text);
+                            double dMenor = double.Parse(txtCampo2.Text);
+                            double resultado = dMayor * dMenor / 2;
+                            txtResultado.Text = resultado.ToString();
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
